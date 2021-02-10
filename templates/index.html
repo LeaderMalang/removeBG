@@ -1,0 +1,131 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Background Image Removal</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="../static/assets/css/main.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<div id="spinner">
+</div>
+
+<header id="header">
+    <div class="inner">
+        <a href="index.html" class="logo">Remove BG Images</a>
+        <nav id="nav">
+            <a href="index.html">Home</a>
+        </nav>
+    </div>
+</header>
+<a href="#menu" class="navPanelToggle"><span class="fa fa-bars"></span></a>
+
+<section id="banner">
+    <div class="inner">
+        <h1>Remove BG Images: <span>A Open Source AI Tool For <br/>
+					Removal Of Images Having A Background</span></h1>
+        <ul class="actions">
+            <li><a href="#one" class="button alt">Get Started</a></li>
+        </ul>
+    </div>
+</section>
+
+<!-- One -->
+<section id="one">
+    <div class="inner">
+        <header>
+            <h2>Remove Background Images</h2>
+        </header>
+        <form action="" method="post" enctype="multipart/form-data">
+            <input type="file" name="image" id="image" class="custom-file-input">
+            <br>
+            <br>
+            <input style="width: 175px" type="submit" name="submit" value="Upload" onclick="fetchData()">
+        </form>
+    </div>
+</section>
+
+<!-- Two -->
+<section id="two">
+    <div class="inner">
+        <article>
+            <div class="content">
+                <header>
+                    <h3>Original Image</h3>
+                </header>
+                <div class="image fit">
+                    {% if data %}
+                    <img src={{ data }} alt="Original Image"/>
+                    {% else %}
+                    <h6> Please Choose An Image</h6>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+        <article class="alt">
+            <div class="content">
+                <header>
+                    <h3>Removed Background Image</h3>
+                </header>
+                <div class="image fit">
+                    {% if con %}
+                    <img src="../static/Non-Background-Images/{{ con }}" alt="Non Background Image"/>
+                    <br>
+                    <br>
+                    <a href="{{ url_for('downloads',filename=con) }}" class="move"><button class="btn"> Download </button></a>
+                    {% elif uri %}
+                    <img src="{{ uri }}" alt="Non Background Image"/>
+                    <br>
+                    <br>
+                    <a href="{{ url_for('downloads',filename=uri) }}" class="move"> <button class="btn"> Download </button></a>
+                    {% else %}
+                    <p></p>
+                    {% endif %}
+                </div>
+            </div>
+        </article>
+    </div>
+</section>
+<!-- Footer -->
+<section id="footer">
+    <div class="inner">
+        <div class="copyright">
+            &copy; Aarthif Nawaz<a href="#"> 2021 </a>
+        </div>
+    </div>
+</section>
+
+<!-- Scripts -->
+<script src="../static/assets/js/jquery.min.js"></script>
+<script src="../static/assets/js/skel.min.js"></script>
+<script src="../static/assets/js/util.js"></script>
+<script src="../static/assets/js/main.js"></script>
+
+<script type="text/javascript">
+    const spinner = document.getElementById("spinner");
+
+    function showSpinner() {
+        spinner.className = "show";
+    }
+
+    function hideSpinner() {
+        spinner.className = spinner.className.replace("show", "");
+    }
+    function fetchData() {
+  showSpinner()
+        document.getElementsByTagName('img').style.opacity = 0.3
+  fetch('/')
+  .then(response => response.json())
+    .then(data => {
+    hideSpinner()
+        document.getElementsByTagName('img').style.opacity = 1
+    console.log("hello")
+  });
+}
+
+
+</script>
+
+</body>
+</html>
